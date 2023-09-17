@@ -1,0 +1,8 @@
+# Ignore the venv directory
+venv/
+
+# Ignore the cache directory
+cache/
+
+# Ignore the pandasai.log file
+pandasai.log
