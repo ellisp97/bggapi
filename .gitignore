@@ -1,6 +1,4 @@
-venv/
-cache/
-__pycache__/
-pandasai.log
-.DS_Store
-.env
+bbgapi/cache/
+bggapi/__pycache__/
+bggapi/pandasai.log
+bggapi/.env

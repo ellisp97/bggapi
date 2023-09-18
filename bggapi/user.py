@@ -1,5 +1,3 @@
-import requests
-
 from utils import PlayRecordParser, BoardgameUrls
 
 

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  bggapi:
+    image: bggapi:latest
+    build: ./app
+    command: streamlit run bggapi/main.py --server.port 8051
+    volumes:
+      - ./bggapi/:/app/bggapi
+    ports:
+      - 8051:8051
