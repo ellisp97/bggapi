@@ -1,8 +1,6 @@
 from boardgame import Boardgame
 from chain import get_ai_model
 from user import User
-from langchain.llms import OpenAI
-from pandasai.middlewares.streamlit import StreamlitMiddleware
 from langchain.callbacks import StreamlitCallbackHandler
 import streamlit as st
 
@@ -13,7 +11,7 @@ class ChatAI():
     boardgame = None
     pandas_ai = None
 
-    def parse_query(self, query):
+    def parse_query(self):
         df = self.user.boardgame_dict[self.boardgame.name.lower()]
         self.pandas_ai = get_ai_model(df)
         try:

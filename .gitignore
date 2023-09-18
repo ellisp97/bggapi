@@ -3,3 +3,4 @@ cache/
 __pycache__/
 pandasai.log
 .DS_Store
+.env

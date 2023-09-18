@@ -1,8 +1,6 @@
 import streamlit as st
 
 from chat import ChatAI
-from user import User
-
 
 def main():
     # Get or create the session state dictionary
@@ -43,7 +41,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                st.write(response := chat.parse_query(prompt))
+                st.write(response := chat.parse_query())
         message = {"role": "assistant", "content": response}
         st.session_state.messages.append(message)
 
