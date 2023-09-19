@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bookworm as builder
+FROM python:3.11-slim-bullseye as builder
 
 RUN apt-get update && apt-get install -y git
 
@@ -15,7 +15,7 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
-FROM python:3.11-slim-bookworm as runtime
+FROM python:3.11-slim-bullseye as runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"

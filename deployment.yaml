@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bggapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bggapi
+  template:
+    metadata:
+      labels:
+        app: bggapi
+    spec:
+      containers:
+      - name: bggapi
+        image: gcr.io/bggapi/bggapi:latest
+        ports:
+        - containerPort: 8051
