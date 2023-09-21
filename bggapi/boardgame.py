@@ -1,7 +1,14 @@
 import xml.etree.ElementTree as ET
 import requests
+import os
+import requests
 from utils import BoardgameUrls, PlayRecordParser
+from dotenv import load_dotenv
 
+load_dotenv()
+
+SERP_API_KEY = os.getenv("SERP_API_KEY")
+BASE_IMAGE_URL = "https://serpapi.com/search.json"
 
 class Boardgame():
     """
@@ -14,6 +21,7 @@ class Boardgame():
 
         self.name = name
         self.boardgame_id = self.get_boardgame_id()
+        self.boardgame_image = self.get_boardgame_image(self.name)
         self.df = None
 
         print(f"The ID for the boardgame {self.name} is {self.boardgame_id}.")
@@ -43,3 +51,16 @@ class Boardgame():
 
     def get_play_history_df(self, query_params):
         self.df = PlayRecordParser(query_params)
+
+    def get_boardgame_image(self, name: str):
+        query_params = {
+            "engine": "google_images",
+            "q": name + " boardgame",
+            "api_key": SERP_API_KEY,
+        }
+        response = requests.get(url=BASE_IMAGE_URL, params=query_params)
+        for result in response.json()["images_results"]:
+            original = result["original"]
+            if original:
+                return original
+        return ''

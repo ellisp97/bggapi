@@ -1,5 +1,4 @@
 import streamlit as st
-
 from chat import ChatAI
 
 def main():
@@ -14,6 +13,17 @@ def main():
     # Retrieve the ChatAI object from the session state
     chat = st.session_state['session_state']['chat']
 
+    if chat.boardgame:
+        header = st.container()
+        with header:
+            image_url = chat.boardgame.boardgame_image
+            st.markdown(
+                f'<div style="max-height: 250px; text-align: center;">'
+                f'<img src="{image_url}" alt="Image" style="height: auto; max-height: 250px; width: auto; max-width: 100%;">'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
+
     st.title('BGG API Analysis')
     st.sidebar.header('Board Game Play Data')
     st.sidebar.write('This app allows you to query the BGG API for play data and perform analysis on the results.')
@@ -21,6 +31,7 @@ def main():
     # Load the user / boardgame data into the side bar
     chat.subheader_boardgame()
     chat.subheader_user()
+
 
     # Store LLM generated responses
     if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):

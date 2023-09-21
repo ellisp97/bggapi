@@ -26,7 +26,7 @@ class ChatAI():
     def subheader_user(self):
         st.sidebar.subheader('User Data')
         username = st.sidebar.text_input('Enter a username:', '')
-        if not self.user:
+        if not self.user or self.user.username != username:
             try:
                 if username:
                     self.user = User(username=username)
@@ -35,14 +35,12 @@ class ChatAI():
             except Exception as e:
                 print(e)
                 st.sidebar.write('Username {} not found'.format(username))
-        else:
-            st.sidebar.subheader(self.user.username)
-            st.sidebar.write("Boardgames: ", list(self.user.boardgame_dict.keys()))
+
 
     def subheader_boardgame(self):
         st.sidebar.subheader('Boardgame Data')
         name = st.sidebar.text_input('Enter a boardgame name:', '')
-        if not self.boardgame:
+        if not self.boardgame or self.boardgame.name != name:
             try:
                 if name:
                     self.boardgame = Boardgame(name=name)
@@ -50,5 +48,3 @@ class ChatAI():
             except Exception as e:
                 print(e)
                 st.sidebar.write('Boardgame {} not found'.format(name))
-        else:
-            st.sidebar.subheader(self.boardgame.name)
