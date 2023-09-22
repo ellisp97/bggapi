@@ -6,9 +6,6 @@ class User():
     Class to query user play information, grouping by boardgames
     """
     def __init__(self, username: str):
-        if not username:
-            return None
-
         self.username = username
         self.boardgame_dict = self.group_boardgames()
 

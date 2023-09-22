@@ -62,7 +62,7 @@ class PlayRecordParser:
                             'userid': player.get('userid'),
                             'name': player.get('name'),
                             'color': player.get('color'),
-                            'score': player.get('score'),
+                            'score': self.get_score(player.get('score'), play_data["game_name"]),
                             'win': player.get('win')
                         }
                         players_data.append(player_data)
@@ -82,6 +82,24 @@ class PlayRecordParser:
         else:
             print(f"Failed to fetch data from page {page}. Status code: {response.status_code}")
 
+    @staticmethod
+    def get_score(score: str, boardgame: str) -> int:
+        """
+        Implement unique rules to parse score data relating to certain boardgames
+        """
+        if boardgame == "Root":
+            if score == "Dominance":
+                score = 10
+        else:
+            pass
+
+        try:
+            parsed_score = int(score)
+            return parsed_score
+        except ValueError:
+            return 0
+
+
     def parse(self):
         page = 1
         while page < self.max_pages:
@@ -97,4 +115,5 @@ class PlayRecordParser:
                 break
 
     def to_dataframe(self):
-        return pd.DataFrame(self.all_records)
+        dataframe = pd.DataFrame(self.all_records)
+        return dataframe
