@@ -7,6 +7,6 @@ services:
       target: runtime
     image: bggapi:latest
     ports:
-      - "8051:8051"
+      - "8080:8080"
     volumes:
       - ./bggapi:/app/bggapi

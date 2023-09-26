@@ -1,5 +1,11 @@
 FROM python:3.11-slim-bullseye as builder
 
+ENV HOST=0.0.0.0
+
+ENV LISTEN_PORT 8080
+
+EXPOSE 8080
+
 RUN apt-get update && apt-get install -y git
 
 RUN pip install poetry==1.4.2
@@ -25,4 +31,4 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY ./bggapi ./bggapi
 
 
-CMD ["streamlit", "run", "bggapi/main.py", "--server.port", "8051"]
+CMD ["streamlit", "run", "bggapi/main.py", "--server.port", "8080"]

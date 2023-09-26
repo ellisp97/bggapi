@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bggapi-deployment
+  namespace: default  # Specify the namespace here
 spec:
   replicas: 1
   selector:
@@ -16,4 +17,5 @@ spec:
       - name: bggapi
         image: gcr.io/bggapi/bggapi:latest
         ports:
-        - containerPort: 8051
+        - containerPort: 8080
+          protocol: TCP
