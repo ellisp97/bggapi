@@ -4,3 +4,4 @@ bggapi/pandasai.log
 bggapi/.env
 .idea/
 .DS_Store
+bggapi/test.py

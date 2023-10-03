@@ -70,10 +70,12 @@ class PlayRecordParser:
                     player_names = [player['name'] for player in players_data]
                     player_scores = [player['score'] for player in players_data]
                     player_wins = [player['win'] == '1' for player in players_data]
+                    player_team = [player['color'] for player in players_data]
 
                     # Creating a dictionary to store the results
                     player_dict = {name + '_score': score for name, score in zip(player_names, player_scores)}
                     player_dict.update({name + '_win': win for name, win in zip(player_names, player_wins)})
+                    player_dict.update({name + '_team': team for name, team in zip(player_names, player_team)})
 
                     # Add the player_dict to data
                     play_data.update(player_dict)
