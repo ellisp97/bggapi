@@ -11,7 +11,7 @@ class ChatAI():
     pandas_ai = None
 
     def parse_query(self):
-        df = self.user.boardgame_dict[self.boardgame.name.lower()]
+        df = self.user.boardgame_dict[self.boardgame.name]
         self.pandas_ai = get_ai_model(df)
         try:
             st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
@@ -29,11 +29,13 @@ class ChatAI():
             try:
                 if username:
                     self.user = User(username=username)
-                    st.sidebar.subheader(self.user.username)
-                    st.sidebar.write("Boardgames: ", list(self.user.boardgame_dict.keys()))
             except Exception as e:
                 print(e)
                 st.sidebar.write('Username {} not found'.format(username))
+
+        if self.user:
+            st.sidebar.subheader(self.user.username)
+            st.sidebar.write("Boardgames: ", list(self.user.boardgame_dict.keys()))
 
 
     def subheader_boardgame(self):
