@@ -6,7 +6,6 @@ import streamlit as st
 
 
 class ChatAI():
-    selected = None
     user = None
     boardgame = None
     pandas_ai = None
