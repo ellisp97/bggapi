@@ -32,3 +32,7 @@ streamlit run bggapi/app.py
 This application is deployed on Google Cloud using a Kubernetes cluster. Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. 
 
 In our setup, we use a LoadBalancer service, which exposes the application to the internet by assigning it a fixed, external IP address. The application is accessible at [bgg-copilot.com](http://bgg-copilot.com). The deployment process involves building a Docker image of the application, pushing it to the Google Container Registry, and updating the Kubernetes deployment to use the new image. This ensures that the live application is always running the latest version of the code.
+
+## Example
+
+![Bar Graph from BGG Data](https://github.com/ellisp97/bggapi/blob/main/bar_graph.png)
