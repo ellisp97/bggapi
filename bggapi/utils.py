@@ -12,6 +12,7 @@ class BoardgameUrls():
     COLLECTION = f"{BASE_URL}/collection"
     GUILD = f"{BASE_URL}/guild"
 
+
 class PlayRecordParser:
     def __init__(self, query_params):
         self.query_params = query_params
@@ -119,3 +120,4 @@ class PlayRecordParser:
     def to_dataframe(self):
         dataframe = pd.DataFrame(self.all_records)
         return dataframe
+

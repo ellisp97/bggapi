@@ -32,7 +32,6 @@ def main():
     chat.subheader_boardgame()
     chat.subheader_user()
 
-
     # Store LLM generated responses
     if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):
         st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
@@ -52,11 +51,15 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                st.write(response := chat.parse_query())
+                if chat.boardgame.name in chat.user.boardgame_dict:
+                    response = chat.parse_query(st.session_state.messages[-1]["content"])
+                else:
+                    response = "Please select a boardgame from the sidebar, this is case sensitive."
+                st.write(response)
+
+        # Add the response to the chat history if its has not been written
         message = {"role": "assistant", "content": response}
         st.session_state.messages.append(message)
-
-
 
 
 if __name__ == '__main__':
